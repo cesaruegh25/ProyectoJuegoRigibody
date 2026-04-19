@@ -4,7 +4,7 @@ public class PlayerAnimation : MonoBehaviour
 {
 
     [SerializeField] private Animator animator;
-    [SerializeField] private PlayerMovement player;
+    [SerializeField] private Rigidbody rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,17 +13,17 @@ public class PlayerAnimation : MonoBehaviour
         {
             animator = GetComponent<Animator>();
         }
-        if (player == null)
+        if (rb == null)
         {
-            player = GetComponent<PlayerMovement>();
+            rb = GetComponent<Rigidbody>();
         }
     }
     private void FixedUpdate()
     {
-        Vector3 direccion = transform.TransformDirection(
-            new Vector3(player.moveInput.x, 0, player.moveInput.y));
-        animator.SetFloat("X", direccion.x);
-        animator.SetFloat("Y", direccion.z);
+        Vector3 vWorrld = rb.linearVelocity;
+        Vector3 vLocal = transform.InverseTransformDirection(vWorrld);
+        animator.SetFloat("X", vLocal.x);
+        animator.SetFloat("Y", vLocal.z);
 
     }
     // Update is called once per frame

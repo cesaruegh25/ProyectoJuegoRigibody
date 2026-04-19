@@ -28,7 +28,7 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "6c2ab1b8-8984-453a-af3d-a3c78ae1679a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -91,6 +91,15 @@
                     "name": "Grab",
                     "type": "Button",
                     "id": "e388e11b-a8e2-4021-b8da-61d04f0a752b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CambioCamara",
+                    "type": "Button",
+                    "id": "2f481788-2b2f-461a-a175-b5743c803ac6",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -480,6 +489,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eda94aea-c26c-455d-83d3-d904e2c026f1",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CambioCamara",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -392,7 +392,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -779,7 +779,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1373134275
 Transform:
   m_ObjectHideFlags: 0
@@ -802,7 +802,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1373134274}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -909,6 +909,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0558703c2bf0e5f468d0381e3022ec36, type: 3}
       propertyPath: m_Name
       value: detective2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0558703c2bf0e5f468d0381e3022ec36, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1630794972795428178, guid: 0558703c2bf0e5f468d0381e3022ec36, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -1124,6 +1128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e90981ef83799345846342ea97561ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseSensivity: 0.15
+  camaras:
+  - {fileID: 330585545}
+  - {fileID: 1373134277}
 --- !u!114 &1377635026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,7 +1145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1377635023}
-  player: {fileID: 1377635021}
+  rb: {fileID: 1377635016}
 --- !u!1 &1582263630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,7 +1160,7 @@ GameObject:
   - component: {fileID: 1582263631}
   m_Layer: 0
   m_Name: Object
-  m_TagString: Untagged
+  m_TagString: take
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1172,11 +1180,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 4, y: 4, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1582263632
 MeshRenderer:
@@ -1201,7 +1209,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: be564332eb6cc2c41bf18319b5b2e9e6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
