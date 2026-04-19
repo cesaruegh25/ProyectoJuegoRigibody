@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - take
+  - mano
+  - codo
+  - cabeza
   layers:
   - Default
   - TransparentFX

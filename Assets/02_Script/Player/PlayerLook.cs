@@ -12,10 +12,11 @@ public class PlayerLook : MonoBehaviour
     private float minPitch = -10f;
     private float maxPitch = 30f;
     private float camaraY = 0f;
-    private Vector2 lookInput;
+    public Vector2 lookInput;
     private float pitch;
     private Transform cameraTransform;
     private Camera currentCamera;
+    public bool inspeccionar = false;
 
     [Header("cámaras")]
     public List<Camera> camaras;
@@ -33,13 +34,17 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Rotacion camara
-        pitch -= lookInput.y * mouseSensivity;
-        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);// capear el movimiento
-        cameraTransform.localRotation = Quaternion.Euler(pitch, camaraY, 0);
-        // Rotacion horizontal
-        float yaw = lookInput.x * mouseSensivity;
-        transform.Rotate(0, yaw, 0, Space.Self);// Space,Self es para que gire sobre si mismo
+        if (!inspeccionar)
+        {
+            // Rotacion camara
+            pitch -= lookInput.y * mouseSensivity;
+            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);// capear el movimiento
+            cameraTransform.localRotation = Quaternion.Euler(pitch, camaraY, 0);
+            // Rotacion horizontal
+        
+            float yaw = lookInput.x * mouseSensivity;
+            transform.Rotate(0, yaw, 0, Space.Self);// Space,Self es para que gire sobre si mismo
+        }
     }
     // se ejecuta antes que el start se usa para centrar la camara
     private void OnEnable()
