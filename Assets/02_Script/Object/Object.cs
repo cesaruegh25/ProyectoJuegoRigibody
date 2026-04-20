@@ -1,17 +1,19 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 
 public class Object : MonoBehaviour
 {
 
-    public TextMesh text; // Referencia al componente TextMeshProUGUI
+    public TextMeshPro interactuar; // Referencia al componente TextMeshProUGUI
     public GameObject player; // Referencia al jugador
     public bool objectInRange = false; // Variable para verificar si el jugador está en rango del objeto
     public bool isGrabbed = false; // Variable para verificar si el objeto está siendo agarrado
     public Transform mano;
-    private GameObject originalPosition; // Variable para almacenar la posición original del objeto
+    private Vector3 startPosition; // Variable para almacenar la posición original del objeto
+    private Quaternion startRotation; // Variable para almacenar la rotación original del objeto
     public Transform codo;
     public Transform cabeza;
 
@@ -20,8 +22,12 @@ public class Object : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         mano = GameObject.FindGameObjectWithTag("mano").transform;
-        originalPosition = transform.gameObject; // Guardar la posición original del objeto
-        Debug.Log("Posición original del objeto: " + originalPosition.transform.position);
+
+        // 2. Guarda los valores exactos en el Start
+        startPosition = transform.position;
+        startRotation = transform.rotation;
+
+        //Debug.Log("Posición original del objeto: " + startPosition);
         codo = GameObject.FindGameObjectWithTag("codo").transform;
         cabeza = GameObject.FindGameObjectWithTag("cabeza").transform;
     }
@@ -61,28 +67,28 @@ public class Object : MonoBehaviour
         {
             // Aquí puedes agregar la lógica para lo que sucede cuando el jugador entra en contacto con el objeto
             //Debug.Log("El jugador ha entrado en contacto con el objeto.");
-            text.text = "[Q]";
-            text.gameObject.SetActive(true); // Mostrar el texto
+            interactuar.text = "[Q]";
+            interactuar.gameObject.SetActive(true); // Mostrar el texto
             objectInRange = true; // El jugador está en rango del objeto
         }
     }
     public void OnTriggerExit(Collider other)
     {
-        text.gameObject.SetActive(false); // Ocultar el texto cuando el jugador sale del área
+        interactuar.gameObject.SetActive(false); // Ocultar el texto cuando el jugador sale del área
         objectInRange = false; // El jugador ya no está en rango del objeto
     }
     public void TakeObject()
     {
-        text.gameObject.SetActive(false); // Ocultar el texto cuando el jugador sale del área
+        interactuar.gameObject.SetActive(false); // Ocultar el texto cuando el jugador sale del área
         player.GetComponent<Animator>().enabled = false;
         player.GetComponent<PlayerLook>().AcivarCamara(1);
         cabeza.transform.localPosition = new Vector3(0f, 0f, 0f);
-        cabeza.transform.localRotation = new Quaternion(0.0956106037f, -0.0613357387f, 0.0817529634f, 0.990158081f);
+        cabeza.transform.localRotation = new Quaternion(0.0637720451f, -0.116740845f, 0.0192111824f, 0.990926683f); // 20 field of view
         codo.transform.localPosition = new Vector3(-0.24f, 0.15f, 0.23f);
         codo.transform.localRotation = new Quaternion(0.767379701f, -0.329159319f, 0.502281785f, 0.224712208f);
         Debug.Log("El jugador ha agarrado el objeto.");
         transform.SetParent(mano);
-        transform.localPosition = new Vector3(0, 0, 0); // Ajustar la posición local del objeto para que esté en la mano del jugador
+        transform.localPosition = new Vector3(-0.0115999999f, 0.0648000017f, 0.0948000029f); // Ajustar la posición local del objeto para que esté en la mano del jugador
     }
     public void DropObject()
     {
@@ -90,7 +96,7 @@ public class Object : MonoBehaviour
         player.GetComponent<PlayerLook>().AcivarCamara(0);
         Debug.Log("El jugador ha soltado el objeto.");
         transform.SetParent(null); // Desvincular el objeto del jugador
-        transform.position = originalPosition.transform.position;
-        transform.rotation = originalPosition.transform.rotation;
+        transform.position = startPosition;
+        transform.rotation = startRotation;
     }
 }

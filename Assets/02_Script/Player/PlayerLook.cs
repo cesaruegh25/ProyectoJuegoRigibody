@@ -17,6 +17,9 @@ public class PlayerLook : MonoBehaviour
     private Transform cameraTransform;
     private Camera currentCamera;
     public bool inspeccionar = false;
+    public float zoomSpeed = 150f;
+    public float minFOV = 20f;
+    public float maxFOV = 60f;
 
     [Header("cámaras")]
     public List<Camera> camaras;
@@ -44,6 +47,21 @@ public class PlayerLook : MonoBehaviour
         
             float yaw = lookInput.x * mouseSensivity;
             transform.Rotate(0, yaw, 0, Space.Self);// Space,Self es para que gire sobre si mismo
+
+        }
+        else
+        {
+            float scrollInput = Mouse.current.scroll.ReadValue().y / 120f;
+            //Debug.Log("Scroll Input: " + scrollInput); // Verificar el valor del scroll
+
+            if (scrollInput != 0)
+            {
+                // Modificamos el FOV (usamos -= para que hacia adelante sea acercar)
+                currentCamera.fieldOfView -= scrollInput * zoomSpeed;
+
+                // Limitamos el valor para que no se pase de los rangos definidos
+                currentCamera.fieldOfView = Mathf.Clamp(currentCamera.fieldOfView, minFOV, maxFOV);
+            }
         }
     }
     // se ejecuta antes que el start se usa para centrar la camara
