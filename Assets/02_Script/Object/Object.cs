@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class Object : MonoBehaviour, IInteractable
 {
-
-    public TextMeshPro interactuar; // Referencia al componente TextMeshProUGUI
     public GameObject player; // Referencia al jugador
     //public bool objectInRange = false; // Variable para verificar si el jugador está en rango del objeto
     public bool isGrabbed = false; // Variable para verificar si el objeto está siendo agarrado
@@ -80,7 +78,6 @@ public class Object : MonoBehaviour, IInteractable
     }*/
     public void TakeObject()
     {
-        interactuar.gameObject.SetActive(false); // Ocultar el texto cuando el jugador sale del área
         player.GetComponent<Animator>().enabled = false;
         player.GetComponent<PlayerLook>().AcivarCamara(1);
         cabeza.transform.localPosition = new Vector3(0f, 0f, 0f);
