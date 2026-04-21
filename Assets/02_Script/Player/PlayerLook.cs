@@ -9,8 +9,8 @@ public class PlayerLook : MonoBehaviour
     public float mouseSensivity = 0.15f;
 
     [Header("Pitch")]
-    private float minPitch = -10f;
-    private float maxPitch = 30f;
+    public float minPitch = -10f;
+    public float maxPitch = 30f;
     private float camaraY = 0f;
     public Vector2 lookInput;
     private float pitch;
@@ -25,7 +25,6 @@ public class PlayerLook : MonoBehaviour
     public List<Camera> camaras;
     private int indiceAtual = 0;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         UpdateActiveCamera();
@@ -51,9 +50,10 @@ public class PlayerLook : MonoBehaviour
         }
         else
         {
+            Vector2 moveInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().moveInput ;
             float scrollInput = Mouse.current.scroll.ReadValue().y / 120f;
             //Debug.Log("Scroll Input: " + scrollInput); // Verificar el valor del scroll
-
+            currentCamera.transform.Rotate(-moveInput.y * 0.3f, moveInput.x * 0.3f, 0, Space.Self);
             if (scrollInput != 0)
             {
                 // Modificamos el FOV (usamos -= para que hacia adelante sea acercar)

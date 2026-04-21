@@ -20,7 +20,6 @@ public class MaletinOpen : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Aquí puedes agregar la lógica para abrir el maletín, como reproducir una animación o cambiar el estado del objeto
-            Debug.Log("¡Maletín abierto!");
             AbrirMaletin();
         }
     }
@@ -36,6 +35,7 @@ public class MaletinOpen : MonoBehaviour
             yield return new WaitForSeconds(0.5f); // Espera medio segundo antes de abrir el maletín
             Vector3 targetRotation = new Vector3(315, 0, 0);
             transform.Rotate(targetRotation, Space.Self);
+            Debug.Log("¡Maletín abierto!");
         }
 
     }

@@ -4,16 +4,16 @@ using TMPro;
 using UnityEngine;
 
 
-public class Object : MonoBehaviour
+public class Object : MonoBehaviour, IInteractable
 {
 
     public TextMeshPro interactuar; // Referencia al componente TextMeshProUGUI
     public GameObject player; // Referencia al jugador
-    public bool objectInRange = false; // Variable para verificar si el jugador está en rango del objeto
+    //public bool objectInRange = false; // Variable para verificar si el jugador está en rango del objeto
     public bool isGrabbed = false; // Variable para verificar si el objeto está siendo agarrado
     public Transform mano;
-    private Vector3 startPosition; // Variable para almacenar la posición original del objeto
-    private Quaternion startRotation; // Variable para almacenar la rotación original del objeto
+    private Vector3 startPosition;
+    private Quaternion startRotation;
     public Transform codo;
     public Transform cabeza;
 
@@ -35,25 +35,9 @@ public class Object : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.gameObject.GetComponent<PlayerTake>().objectTaken && objectInRange)
-        {
-            if (!isGrabbed)
-            {   
-                TakeObject();
-                isGrabbed = true;
-                player.gameObject.GetComponent<PlayerLook>().inspeccionar = true;
-            }
-            else if (isGrabbed)
-            {
-                DropObject();
-                isGrabbed = false;
-                player.gameObject.GetComponent<PlayerLook>().inspeccionar = false;
-            }
-            player.gameObject.GetComponent<PlayerTake>().objectTaken = false; // Reiniciar la variable de agarre
-        }
         if(isGrabbed)
         {
-            objectInRange = true; // El jugador está en rango del objeto
+            player.gameObject.GetComponent<PlayerMovement>().movimiento = false;
             float lookY = player.gameObject.GetComponent<PlayerLook>().lookInput.x *
                     player.gameObject.GetComponent<PlayerLook>().mouseSensivity;
             float LookX = player.gameObject.GetComponent<PlayerLook>().lookInput.y *
@@ -61,7 +45,24 @@ public class Object : MonoBehaviour
             transform.Rotate(LookX, lookY, 0, Space.Self);// Space,Self es para que gire sobre si mismo
         }
     }
-    public void OnTriggerEnter(Collider other)
+    public void Interact()
+    {
+        if (!isGrabbed)
+        {   
+            TakeObject();
+            isGrabbed = true;
+            player.gameObject.GetComponent<PlayerLook>().inspeccionar = true;
+        }
+        else if (isGrabbed)
+        {
+            DropObject();
+            isGrabbed = false;
+            player.gameObject.GetComponent<PlayerMovement>().movimiento = true;
+            player.gameObject.GetComponent<PlayerLook>().inspeccionar = false;
+        }
+        //player.gameObject.GetComponent<PlayerTake>().objectTaken = false;
+    }
+    /*public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -76,7 +77,7 @@ public class Object : MonoBehaviour
     {
         interactuar.gameObject.SetActive(false); // Ocultar el texto cuando el jugador sale del área
         objectInRange = false; // El jugador ya no está en rango del objeto
-    }
+    }*/
     public void TakeObject()
     {
         interactuar.gameObject.SetActive(false); // Ocultar el texto cuando el jugador sale del área
