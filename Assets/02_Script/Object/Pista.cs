@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Pista : MonoBehaviour, IInteractable
 {
-    public Note prefabNote;
+    public string nombre; // Nombre de la pista
+    public string descripcion; // Descripción de la pista
+    public Libreta libreta;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,6 +19,7 @@ public class Pista : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
+        libreta.AddNote(nombre, descripcion);
         Debug.Log("Has interactuado con la pista: " + gameObject.name);
     }
 }

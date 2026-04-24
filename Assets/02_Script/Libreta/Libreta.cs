@@ -2,12 +2,16 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Libreta : MonoBehaviour
 {
     public List<Note> notas = new List<Note>();
 
     public int pagActual = 0;
+
+    public Note prefabNoteIzq;
+    public Note prefabNoteDer;
 
     void Start()
     {
@@ -20,9 +24,34 @@ public class Libreta : MonoBehaviour
         
     }
 
-    public void AddNote(Note note)
+    public void OnPrevious(InputValue value)
     {
-        notas.Add(note);
+        if (value.isPressed)
+        {
+            ActivePrevPag();
+        }
+    }
+    public void OnNext(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            ActiveNextPag();
+        }
+    }
+    public void AddNote(String T, String D)
+    {
+        if (notas.Count % 2 == 0)
+        {
+            Note nuevaNota = Instantiate(prefabNoteIzq, transform);
+            nuevaNota.EscribirNota(T, D, notas.Count.ToString());
+            notas.Add(nuevaNota);
+        }
+        else
+        {
+            Note nuevaNota = Instantiate(prefabNoteDer, transform);
+            nuevaNota.EscribirNota(T, D, notas.Count.ToString());
+            notas.Add(nuevaNota);
+        }
     }
 
 
@@ -30,6 +59,7 @@ public class Libreta : MonoBehaviour
     {
         if (pagActual < notas.Count)
         {
+            pagActual += 2;
             foreach (var nota in notas)
             {
                 if (notas.IndexOf(nota) == pagActual || notas.IndexOf(nota) == (pagActual + 1))
@@ -39,13 +69,14 @@ public class Libreta : MonoBehaviour
                 else
                     nota.gameObject.SetActive(false);
             }
-            pagActual *= 2;
+            Debug.Log("Pagina actual Next: " + pagActual);
         }
     }
     public void ActivePrevPag()
     {
         if (pagActual > 0)
         {
+            pagActual -= 2;
             foreach (var nota in notas)
             {
                 if (notas.IndexOf(nota) == pagActual || notas.IndexOf(nota) == (pagActual + 1))
@@ -55,7 +86,7 @@ public class Libreta : MonoBehaviour
                 else
                     nota.gameObject.SetActive(false);
             }
-            pagActual -= 2;
         }
+        Debug.Log("Pagina actual Prev: " + pagActual);
     }
 }
