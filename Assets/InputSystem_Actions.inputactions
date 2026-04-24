@@ -104,6 +104,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Note",
+                    "type": "Button",
+                    "id": "4f516880-7240-42b6-a52d-2d166405e27e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -500,6 +509,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CambioCamara",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e20cab3-03d6-4603-8701-43f0bc6f9650",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Note",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
