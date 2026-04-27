@@ -14,10 +14,13 @@ public class Object : MonoBehaviour, IInteractable
     private Quaternion startRotation;
     public Transform codo;
     public Transform cabeza;
+    public GameObject pista;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        pista = transform.GetChild(0).gameObject; // Asumiendo que la pista es el primer hijo del objeto
+        pista.gameObject.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player");
         mano = GameObject.FindGameObjectWithTag("mano").transform;
 
@@ -78,6 +81,7 @@ public class Object : MonoBehaviour, IInteractable
     }*/
     public void TakeObject()
     {
+        pista.gameObject.SetActive(true);
         player.GetComponent<Animator>().enabled = false;
         player.GetComponent<PlayerLook>().AcivarCamara(1);
         cabeza.transform.localPosition = new Vector3(0f, 0f, 0f);
@@ -90,6 +94,7 @@ public class Object : MonoBehaviour, IInteractable
     }
     public void DropObject()
     {
+        pista.gameObject.SetActive(false);
         player.GetComponent<Animator>().enabled = true;
         player.GetComponent<PlayerLook>().AcivarCamara(0);
         Debug.Log("El jugador ha soltado el objeto.");

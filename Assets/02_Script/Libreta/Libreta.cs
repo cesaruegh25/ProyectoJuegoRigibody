@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,29 +16,35 @@ public class Libreta : MonoBehaviour
 
     void Start()
     {
-        
+        LibretaInicio();
     }
-
-    // Update is called once per frame
-    void Update()
+    public void LibretaInicio()
     {
-        
+        foreach (var nota in notas)
+        {
+            if (notas.IndexOf(nota) == 0 || notas.IndexOf(nota) == 1)
+            {
+                nota.gameObject.SetActive(true);
+            }
+            else
+                nota.gameObject.SetActive(false);
+        }
     }
-
-    public void OnPrevious(InputValue value)
+    public void Update()
     {
-        if (value.isPressed)
+        // detectar la fecha izquierda solo cuando se pulsa la primera vez
+        if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
         {
             ActivePrevPag();
+            Debug.Log("pagina actual: " + pagActual);
         }
-    }
-    public void OnNext(InputValue value)
-    {
-        if (value.isPressed)
+        if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
         {
             ActiveNextPag();
+            Debug.Log("pagina actual: " + pagActual);
         }
     }
+
     public void AddNote(String T, String D)
     {
         if (notas.Count % 2 == 0)
@@ -53,7 +60,6 @@ public class Libreta : MonoBehaviour
             notas.Add(nuevaNota);
         }
     }
-
 
     public void ActiveNextPag()
     {

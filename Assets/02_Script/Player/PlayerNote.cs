@@ -41,6 +41,7 @@ public class PlayerNote : MonoBehaviour
 
     private void LibretaOpen()
     {
+        libreta.GetComponent<Libreta>().LibretaInicio();
         player.GetComponent<Animator>().enabled = false;
         player.GetComponent<PlayerLook>().AcivarCamara(1);
         player.GetComponent<PlayerLook>().inspeccionar = true;

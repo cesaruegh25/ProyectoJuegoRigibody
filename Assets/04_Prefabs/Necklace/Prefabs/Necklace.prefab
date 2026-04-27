@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2401414203969231569}
   - component: {fileID: 1656289934587647348}
   - component: {fileID: 3537759624217633214}
-  - component: {fileID: 6562398283566368959}
   - component: {fileID: 4448453774559984616}
   - component: {fileID: 8490156211386628439}
   m_Layer: 0
@@ -95,27 +94,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6562398283566368959
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3033273108864270443}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.10775997, y: 0.02131474, z: 0.10775877}
-  m_Center: {x: 0.0000015813857, y: 0.010547459, z: 0.0002518855}
 --- !u!114 &4448453774559984616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,13 +106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3860484dbf5e70b4aa80fd19ed996dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Object
-  interactuar: {fileID: 8383041897231759577}
   player: {fileID: 0}
-  objectInRange: 0
   isGrabbed: 0
   mano: {fileID: 0}
   codo: {fileID: 0}
   cabeza: {fileID: 0}
+  pista: {fileID: 0}
 --- !u!65 &8490156211386628439
 BoxCollider:
   m_ObjectHideFlags: 0
