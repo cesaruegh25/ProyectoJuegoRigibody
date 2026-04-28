@@ -104,6 +104,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Camara",
+                    "type": "Button",
+                    "id": "c43a82fc-d2b5-4f98-8794-3b784eda6d06",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -434,6 +443,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Siguiente",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f29e4e64-558e-4f4d-9a9b-e7dd96a7325a",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camara",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

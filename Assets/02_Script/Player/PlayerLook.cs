@@ -102,4 +102,16 @@ public class PlayerLook : MonoBehaviour
         }
         UpdateActiveCamera();
     }
+    public void OnCamara(InputValue Value)
+    {
+        if (Value.isPressed)
+        {
+            indiceAtual += 1;
+            if (indiceAtual >= camaras.Count)
+            {
+                indiceAtual = 0;
+            }
+            AcivarCamara(indiceAtual);
+        }
+    }
 }
