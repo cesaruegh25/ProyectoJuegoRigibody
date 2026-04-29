@@ -20,15 +20,19 @@ public class PlayerAnimation : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector3 vWorrld = rb.linearVelocity;
+        /*Vector3 vWorrld = rb.linearVelocity;
         Vector3 vLocal = transform.InverseTransformDirection(vWorrld);
         animator.SetFloat("X", vLocal.x);
-        animator.SetFloat("Y", vLocal.z);
+        animator.SetFloat("Y", vLocal.z);*/
 
     }
-    // Update is called once per frame
+
     void Update()
     {
         
+    }
+    public void AnimcionLanzar()
+    {
+        animator.SetTrigger("Lanzar");
     }
 }
