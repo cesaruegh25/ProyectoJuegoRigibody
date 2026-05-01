@@ -31,7 +31,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         
     }
-    public void AnimcionLanzar()
+    public void AnimacionLanzar()
     {
         animator.SetTrigger("Lanzar");
     }

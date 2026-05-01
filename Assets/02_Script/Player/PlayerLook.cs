@@ -36,7 +36,12 @@ public class PlayerLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!inspeccionar)
+        if (cameraTransform == null)
+        {
+            UpdateActiveCamera();
+            if (cameraTransform == null) return; // Si aún no hay cámara, salimos del Update para evitar el error
+        }
+        if (!GameManager.instancia.juegoTerminado)
         {
             // Rotacion camara
             pitch -= lookInput.y * mouseSensivity;
@@ -50,18 +55,9 @@ public class PlayerLook : MonoBehaviour
         }
         else
         {
-            Vector2 moveInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().moveInput ;
-            float scrollInput = Mouse.current.scroll.ReadValue().y / 120f;
-            //Debug.Log("Scroll Input: " + scrollInput); // Verificar el valor del scroll
-            currentCamera.transform.Rotate(-moveInput.y * 0.3f, moveInput.x * 0.3f, 0, Space.Self);
-            if (scrollInput != 0)
-            {
-                // Modificamos el FOV (usamos -= para que hacia adelante sea acercar)
-                currentCamera.fieldOfView -= scrollInput * zoomSpeed;
-
-                // Limitamos el valor para que no se pase de los rangos definidos
-                currentCamera.fieldOfView = Mathf.Clamp(currentCamera.fieldOfView, minFOV, maxFOV);
-            }
+            // Si el juego ha terminado, aseguramos que el cursor esté desbloqueado y visible
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
     // se ejecuta antes que el start se usa para centrar la camara
