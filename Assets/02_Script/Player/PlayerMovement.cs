@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
             new Vector3(moveInput.x, 0, moveInput.y));
         Vector3 velocity = direccion * speed;
         Vector3 newVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
-        if (movimiento)
+        if (!GameManager.instancia.menuPrincipal)
         {
             rb.linearVelocity = newVelocity;
         }

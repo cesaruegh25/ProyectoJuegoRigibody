@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8403799746784482906}
   - component: {fileID: 6051277583246384861}
   m_Layer: 0
-  m_Name: bola
+  m_Name: venom_ball
   m_TagString: ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6034957751646507721, guid: 1a972c9256d412a4a8d5361f2cc55286, type: 3}
+  - {fileID: 2100000, guid: 29f0a2a645631d343827363e5cd8cf09, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

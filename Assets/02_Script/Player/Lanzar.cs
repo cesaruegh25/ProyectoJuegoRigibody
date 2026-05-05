@@ -34,7 +34,8 @@ public class Lanzar : MonoBehaviour
     }
     public void OnApuntar(InputValue Value)
     {
-        if (Value.isPressed && GameManager.instancia.tirosRealizados < GameManager.instancia.tirosMaximos)
+        if (Value.isPressed && GameManager.instancia.tirosRealizados < GameManager.instancia.tirosMaximos
+            && !GameManager.instancia.menuPrincipal)
         {
             barraFuerza.gameObject.SetActive(true);
             cargando = true;
@@ -52,7 +53,8 @@ public class Lanzar : MonoBehaviour
     }
     public void OnLanzar(InputValue Value)
     {
-        if (Value.isPressed && GameManager.instancia.tirosRealizados < GameManager.instancia.tirosMaximos)
+        if (Value.isPressed && GameManager.instancia.tirosRealizados < GameManager.instancia.tirosMaximos 
+            && !GameManager.instancia.menuPrincipal)
         {
             cargando = false;
             arrow.SetActive(false);

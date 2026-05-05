@@ -11,12 +11,14 @@ public class GameManager : MonoBehaviour
     public int bolosRestantes = 10;
     public int tirosMaximos = 2;
 
+    public TMP_Dropdown dropownBolas;
     public TextMeshProUGUI panelVictoria;
     public TextMeshProUGUI panelBolos;
     public Button botonReiniciar;
 
     public int tirosRealizados = 0;
     public bool juegoTerminado = false;
+    public bool menuPrincipal = false;
 
     void Awake()
     {
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
             botonReiniciar.onClick.AddListener(ReiniciarJuego);
         }
         juegoTerminado = false;
+        menuPrincipal = true;
     }
     void Update()
     {
@@ -51,6 +54,13 @@ public class GameManager : MonoBehaviour
         {
             instancia = this;
         }
+        if (!menuPrincipal)
+        {
+            dropownBolas.gameObject.SetActive(false);
+        } else
+        {
+            dropownBolas.gameObject.SetActive(true);
+        } 
     }
     public void RegistrarTiro()
     {
@@ -68,6 +78,7 @@ public class GameManager : MonoBehaviour
     }
     void FinPartida()
     {
+        menuPrincipal = true;
         if (panelVictoria != null)
         {
             if (!juegoTerminado && bolosRestantes > 0)

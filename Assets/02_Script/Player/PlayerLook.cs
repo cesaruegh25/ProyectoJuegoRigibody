@@ -41,7 +41,7 @@ public class PlayerLook : MonoBehaviour
             UpdateActiveCamera();
             if (cameraTransform == null) return; // Si aún no hay cámara, salimos del Update para evitar el error
         }
-        if (!GameManager.instancia.juegoTerminado)
+        if (!GameManager.instancia.menuPrincipal)
         {
             // Rotacion camara
             pitch -= lookInput.y * mouseSensivity;
