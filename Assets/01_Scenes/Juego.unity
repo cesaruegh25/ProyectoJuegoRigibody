@@ -2864,7 +2864,7 @@ MonoBehaviour:
   prefabBall: {fileID: 9089158933754685052, guid: fe70cd85289e021418c1a8b1b353ad3a, type: 3}
   arrow: {fileID: 2050196624427984992}
   hand: {fileID: 687986997}
-  fuerzaBola: 1000
+  fuerzaBola: 500
   barraFuerza: {fileID: 403238982}
   velocidadCarga: 1.5
 --- !u!1 &1264911406

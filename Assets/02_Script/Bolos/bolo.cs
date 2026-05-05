@@ -12,13 +12,8 @@ public class bolo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("ball") || collision.gameObject.CompareTag("bolo"))
+        if (transform.rotation.z >= 0.20 || transform.rotation.z <= -0.20)
         {
-            Debug.Log("Colision con la bola");
             Destroy(gameObject, 2f);
             if (!destruido)
             {
@@ -28,7 +23,22 @@ public class bolo : MonoBehaviour
                 }
                 destruido = true; // Llama al método para actualizar el conteo de bolos
             }
-            // Aquí puedes agregar la lógica para dañar al jugador o cualquier otra acción que desees realizar
         }
     }
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ball") || collision.gameObject.CompareTag("bolo"))
+        {
+            Debug.Log("Colision con la bola " + transform.name + " con velocidad: " + GetComponent<Rigidbody>().linearVelocity.magnitude);
+            if (!destruido)
+            {
+                if (GameManager.instancia != null)
+                {
+                    //GameManager.instancia.BoloDestruido();
+                }
+                destruido = true; // Llama al método para actualizar el conteo de bolos
+            }
+            // Aquí puedes agregar la lógica para dañar al jugador o cualquier otra acción que desees realizar
+        }
+    }*/
 }
