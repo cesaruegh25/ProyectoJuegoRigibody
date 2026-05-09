@@ -14,7 +14,7 @@ public class bolo : MonoBehaviour
     {
         if (transform.rotation.z >= 0.20 || transform.rotation.z <= -0.20)
         {
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 1f);
             if (!destruido)
             {
                 if (GameManager.instancia != null)
