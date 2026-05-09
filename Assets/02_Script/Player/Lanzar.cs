@@ -54,7 +54,7 @@ public class Lanzar : MonoBehaviour
     public void OnLanzar(InputValue Value)
     {
         if (Value.isPressed && GameManager.instancia.tirosRealizados < GameManager.instancia.tirosMaximos 
-            && !GameManager.instancia.menuPrincipal)
+            && !GameManager.instancia.menuPrincipal && cargando)
         {
             cargando = false;
             arrow.SetActive(false);
@@ -76,6 +76,7 @@ public class Lanzar : MonoBehaviour
             PlayerLook playerLook = GetComponent<PlayerLook>();
             barraFuerza.gameObject.SetActive(false);
             playerLook.AcivarCamara(0);
+            Destroy(ball, 5f); // Destruye la bola después de 5 segundos para limpiar la escena
         }
     }
     void ActualizarFuerza()

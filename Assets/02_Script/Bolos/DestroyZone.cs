@@ -17,7 +17,7 @@ public class DestroyZone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ball"))
         { 
-            Destroy(collision.gameObject, 2f);
+            Destroy(collision.gameObject, 3f);
             // Aquí puedes agregar la lógica para dañar al jugador o cualquier otra acción que desees realizar
         }
     }

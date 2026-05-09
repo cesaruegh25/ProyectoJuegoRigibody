@@ -9,11 +9,10 @@ public class tutorial : MonoBehaviour
 
     public GameObject gameObj;
     public GameObject cinematicaObj;
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        t = 0;
         duracionCinematica = (float)cine.duration;
         gameObj.SetActive(false);
     }
@@ -26,6 +25,7 @@ public class tutorial : MonoBehaviour
         {
             gameObj.SetActive(true);
             cinematicaObj.SetActive(false);
-        }
+        } 
+        
     }
 }

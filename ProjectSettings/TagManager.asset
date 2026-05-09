@@ -6,6 +6,7 @@ TagManager:
   tags:
   - bolo
   - ball
+  - PosBolos
   layers:
   - Default
   - TransparentFX

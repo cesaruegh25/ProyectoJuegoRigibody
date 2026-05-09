@@ -1,7 +1,9 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,11 +16,16 @@ public class GameManager : MonoBehaviour
     public TMP_Dropdown dropownBolas;
     public TextMeshProUGUI panelVictoria;
     public TextMeshProUGUI panelBolos;
-    public Button botonReiniciar;
+    public UnityEngine.UI.Button botonReiniciar;
 
     public int tirosRealizados = 0;
     public bool juegoTerminado = false;
     public bool menuPrincipal = false;
+
+    public Animator player;
+    public GameObject tutorial;
+
+    bool final = false;
 
     void Awake()
     {
@@ -74,28 +81,39 @@ public class GameManager : MonoBehaviour
     }
     public void ComprobarDerrota()
     {
-        Invoke("FinPartida", 2f);
+        if (!final)
+        {
+            final = true;
+            Invoke("FinPartida", 3f);
+        }
+
     }
     void FinPartida()
     {
         menuPrincipal = true;
-        if (panelVictoria != null)
+        if (!juegoTerminado && bolosRestantes > 0)
         {
-            if (!juegoTerminado && bolosRestantes > 0)
-            {
-                panelVictoria.text = "Derrota... Intenta de nuevo.";
-            }
-            else if (!juegoTerminado && bolosRestantes <= 0)
-            {
-                panelVictoria.text = "Victoriaaaaaa!!!";
-            }
-            juegoTerminado = true;
+            player.Play("Defeat Idle");
             botonReiniciar.gameObject.SetActive(true);
         }
+        else if (!juegoTerminado && bolosRestantes <= 0)
+        {
+            player.Play("Victory Idle");
+            tutorial.SetActive(true);
+        }
+        juegoTerminado = true;
     }
     
     public void ReiniciarJuego()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        player.Play("Idle");
+        botonReiniciar.gameObject.SetActive(false);
+        GameObject.FindGameObjectWithTag("PosBolos").GetComponent<PosBolos>().ReiniciarBolos();
+        juegoTerminado = false;
+        menuPrincipal = false;
+        final = false;
+        tirosRealizados = 0;
+        bolosRestantes = 10;
+        panelBolos.text = "Quedan " + bolosRestantes + " bolos.";
     }
 }

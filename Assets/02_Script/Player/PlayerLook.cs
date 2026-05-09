@@ -43,6 +43,8 @@ public class PlayerLook : MonoBehaviour
         }
         if (!GameManager.instancia.menuPrincipal)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             // Rotacion camara
             pitch -= lookInput.y * mouseSensivity;
             pitch = Mathf.Clamp(pitch, minPitch, maxPitch);// capear el movimiento
