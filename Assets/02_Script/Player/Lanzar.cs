@@ -41,11 +41,10 @@ public class Lanzar : MonoBehaviour
             cargando = true;
             PlayerLook playerLook = GetComponent<PlayerLook>();
             playerLook.AcivarCamara(1);
-            Debug.Log("Apuntar");
             if (ball == null)
             {
-                Instantiate(prefabBall, hand.transform.position, Quaternion.identity, hand.transform); // Instancia la bola como hijo de la mano
-                ball = hand.transform.GetChild(0).gameObject; // Asume que la bola es el primer hijo de la mano
+                ball = Instantiate(prefabBall, hand.transform.position, Quaternion.identity, hand.transform); // Instancia la bola como hijo de la mano
+                //ball = hand.transform.GetChild(0).gameObject; // Asume que la bola es el primer hijo de la mano
             }
             //new Vector3(0.0109999999f, 0.316000015f, 0.186000004f)
             arrow.SetActive(true);
@@ -53,7 +52,7 @@ public class Lanzar : MonoBehaviour
     }
     public void OnLanzar(InputValue Value)
     {
-        if (Value.isPressed && GameManager.instancia.tirosRealizados < GameManager.instancia.tirosMaximos 
+        if (Value.isPressed && GameManager.instancia.tirosRealizados < GameManager.instancia.tirosMaximos
             && !GameManager.instancia.menuPrincipal && cargando)
         {
             cargando = false;
@@ -72,11 +71,11 @@ public class Lanzar : MonoBehaviour
             rb.isKinematic = false; // Asegura que la bola no sea kinemática
             rb.useGravity = true; // Activa la gravedad para la bola
             rb.AddForce(transform.forward * fuerzaActual * fuerzaBola);
+            Destroy(ball, 5f); // Destruye la bola después de 5 segundos para limpiar la escena
             ball = null; // Limpia la referencia a la bola en la mano
             PlayerLook playerLook = GetComponent<PlayerLook>();
             barraFuerza.gameObject.SetActive(false);
             playerLook.AcivarCamara(0);
-            Destroy(ball, 5f); // Destruye la bola después de 5 segundos para limpiar la escena
         }
     }
     void ActualizarFuerza()
@@ -95,5 +94,9 @@ public class Lanzar : MonoBehaviour
 
         // Aplicamos el valor al Slider (el slider debe tener Min Value 0 y Max Value 1)
         barraFuerza.value = fuerzaActual;
+    }
+    public void CambioBola(GameObject nuevaBola)
+    {
+        prefabBall = nuevaBola;
     }
 }

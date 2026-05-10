@@ -31,6 +31,6 @@ public class BallManager : MonoBehaviour
     public void CambiarBola(GameObject nuevaBola)
     {
         GameManager.instancia.menuPrincipal = false;
-        player.prefabBall = nuevaBola;
+        player.CambioBola(nuevaBola);
     }
 }

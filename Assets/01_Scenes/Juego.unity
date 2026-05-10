@@ -8696,7 +8696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 97a02878151d9e2408363234dc535c0d, type: 3}
       propertyPath: m_Name
-      value: Remy
+      value: RemyCinematica
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 97a02878151d9e2408363234dc535c0d, type: 3}
       propertyPath: m_TagString
@@ -9442,9 +9442,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 97a02878151d9e2408363234dc535c0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1225000702}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 97a02878151d9e2408363234dc535c0d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1225000704}
   m_SourcePrefab: {fileID: 100100000, guid: 97a02878151d9e2408363234dc535c0d, type: 3}
 --- !u!1 &1225000696 stripped
 GameObject:
@@ -9590,24 +9587,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1225000704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1225000696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2242d859d4fdce14c8ee133d78987c51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lanzar
-  prefabBall: {fileID: 9089158933754685052, guid: fe70cd85289e021418c1a8b1b353ad3a, type: 3}
-  arrow: {fileID: 0}
-  hand: {fileID: 687986997}
-  fuerzaBola: 500
-  barraFuerza: {fileID: 403238982}
-  velocidadCarga: 1.5
 --- !u!1001 &1237171295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9634,15 +9613,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 97a02878151d9e2408363234dc535c0d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 97a02878151d9e2408363234dc535c0d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 97a02878151d9e2408363234dc535c0d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 97a02878151d9e2408363234dc535c0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11205,7 +11184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2242d859d4fdce14c8ee133d78987c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lanzar
-  prefabBall: {fileID: 9089158933754685052, guid: fe70cd85289e021418c1a8b1b353ad3a, type: 3}
+  prefabBall: {fileID: 9089158933754685052, guid: ac4b8d6c167603b4d892c9d325e23367, type: 3}
   arrow: {fileID: 1655620680}
   hand: {fileID: 1246293041}
   fuerzaBola: 500
@@ -13343,7 +13322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93733a0e380eafd40bf21db3a6da6460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallManager
-  player: {fileID: 1225000704}
+  player: {fileID: 1237171300}
   dropdown: {fileID: 1346341745}
   bolasPrefabs:
   - {fileID: 9089158933754685052, guid: c6d175caf2825bf4da0fa3de32063024, type: 3}
