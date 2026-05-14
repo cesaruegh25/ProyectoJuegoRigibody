@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5316107199087543488}
   - component: {fileID: 8403799746784482906}
   - component: {fileID: 6051277583246384861}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: venom_ball
   m_TagString: ball
   m_Icon: {fileID: 0}

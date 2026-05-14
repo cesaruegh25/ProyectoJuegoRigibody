@@ -30,7 +30,10 @@ public class BallManager : MonoBehaviour
     }
     public void CambiarBola(GameObject nuevaBola)
     {
-        GameManager.instancia.menuPrincipal = false;
+        if (!GameManager.instancia.botonReiniciar.IsActive())
+        {
+            GameManager.instancia.menuPrincipal = false;
+        }
         player.CambioBola(nuevaBola);
     }
 }

@@ -23,9 +23,19 @@ public class GameManager : MonoBehaviour
     public bool menuPrincipal = false;
 
     public Animator player;
-    public GameObject tutorial;
+    public BarreraBolos barrera;
 
     bool final = false;
+    [Header("Puntuaciones")]
+    public int bolosJugador;
+    public int bolosEnemigo;
+
+    [Header("UI Final")]
+    public GameObject hudFinal; // El panel con el botón de "Salir"
+
+    public GameObject enemigoActual;
+    public int tirosEnemigo = 0;
+    public bool turnoJugador = true;
 
     void Awake()
     {
@@ -55,7 +65,18 @@ public class GameManager : MonoBehaviour
         // Comprobamos si el jugador ha perdido después de cada tiro
         if ((tirosRealizados >= tirosMaximos || bolosRestantes <= 0) && GameObject.FindGameObjectsWithTag("ball").Length == 0)
         {
-            ComprobarDerrota();
+            if (enemigoActual == null)
+            {
+                ComprobarDerrota();
+            }
+        }
+        if (tirosRealizados >= tirosMaximos && GameObject.FindGameObjectsWithTag("ball").Length == 0)
+        {
+            if (enemigoActual != null)
+            {
+                CompararResultados();
+
+            }
         }
         if (instancia == null)
         {
@@ -88,6 +109,10 @@ public class GameManager : MonoBehaviour
         }
 
     }
+    public void PrepararSiguienteNivel()
+    {
+        ReiniciarJuego();
+    }
     void FinPartida()
     {
         menuPrincipal = true;
@@ -99,11 +124,65 @@ public class GameManager : MonoBehaviour
         else if (!juegoTerminado && bolosRestantes <= 0)
         {
             player.Play("Victory Idle");
-            tutorial.SetActive(true);
+            CinematicManager.instancia.ReproducirSiguiente();
         }
         juegoTerminado = true;
+        barrera.ActivarBarrera();
     }
-    
+
+    public void IniciarTurnoEnemigo(GameObject enemigo)
+    {
+        enemigoActual = enemigo;
+        turnoJugador = false;
+
+        // Simular que el enemigo tira después de un par de segundos
+        Invoke("EjecutarTiroEnemigo", 2f);
+    }
+    public void EjecutarTiroEnemigo()
+    {
+        turnoJugador = false;
+        if (tirosEnemigo <= 1)
+        {
+            enemigoActual.GetComponent<Animator>().SetTrigger("lanzar");
+            bolosEnemigo = Random.Range(1, 11);
+            Debug.Log("El enemigo ha derribado: " + bolosEnemigo);
+            turnoJugador = true;
+        }
+        tirosEnemigo++;
+    }
+    void CompararResultados()
+    {
+        // Lógica de comparación
+        if (bolosRestantes <= bolosEnemigo) // Si el jugador derribó más (quedan menos)
+        {
+            Debug.Log("¡Ganaste al enemigo!");
+            if (enemigoActual.name.Contains("Ch06")) // Si es el Boss
+            {
+                MostrarFinalJuego();
+            }
+            else
+            {
+                CinematicManager.instancia.ReproducirSiguiente();
+            }
+        }
+        else
+        {
+            Debug.Log("Perdiste. Reintentar.");
+            FinPartida();
+        }
+    }
+    void MostrarFinalJuego()
+    {
+        // Aquí activas la cinemática final y luego el HUD
+        hudFinal.SetActive(true);
+        Time.timeScale = 0; // Pausar el juego al final
+    }
+
+    public void SalirDelJuego()
+    {
+        Application.Quit();
+        Debug.Log("Saliendo...");
+    }
     public void ReiniciarJuego()
     {
         player.Play("Idle");

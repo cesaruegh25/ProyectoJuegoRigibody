@@ -35,7 +35,7 @@ public class Lanzar : MonoBehaviour
     public void OnApuntar(InputValue Value)
     {
         if (Value.isPressed && GameManager.instancia.tirosRealizados < GameManager.instancia.tirosMaximos
-            && !GameManager.instancia.menuPrincipal)
+            && !GameManager.instancia.menuPrincipal && GameManager.instancia.turnoJugador)
         {
             barraFuerza.gameObject.SetActive(true);
             cargando = true;
@@ -76,6 +76,10 @@ public class Lanzar : MonoBehaviour
             PlayerLook playerLook = GetComponent<PlayerLook>();
             barraFuerza.gameObject.SetActive(false);
             playerLook.AcivarCamara(0);
+            if(GameManager.instancia.enemigoActual != null)
+            {
+                GameManager.instancia.Invoke("EjecutarTiroEnemigo", 4f);
+            }
         }
     }
     void ActualizarFuerza()
