@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public int tirosEnemigo = 0;
     public bool turnoJugador = true;
 
+    private bool procesandoResultado = false;
+
     void Awake()
     {
         if (instancia == null)
@@ -72,8 +74,9 @@ public class GameManager : MonoBehaviour
         }
         if (tirosRealizados >= tirosMaximos && GameObject.FindGameObjectsWithTag("ball").Length == 0)
         {
-            if (enemigoActual != null)
+            if (enemigoActual != null && !procesandoResultado)
             {
+                procesandoResultado = true;
                 CompararResultados();
 
             }
@@ -132,6 +135,10 @@ public class GameManager : MonoBehaviour
 
     public void IniciarTurnoEnemigo(GameObject enemigo)
     {
+        if(enemigoActual != enemigo)
+        {
+            tirosEnemigo = 0; // Reiniciar el conteo de tiros del enemigo
+        }
         enemigoActual = enemigo;
         turnoJugador = false;
 
@@ -153,16 +160,24 @@ public class GameManager : MonoBehaviour
     void CompararResultados()
     {
         // Lógica de comparación
-        if (bolosRestantes <= bolosEnemigo) // Si el jugador derribó más (quedan menos)
+        if (bolosRestantes <= bolosEnemigo)
         {
             Debug.Log("¡Ganaste al enemigo!");
-            if (enemigoActual.name.Contains("Ch06")) // Si es el Boss
+            if (enemigoActual.name.Contains("Ch06"))
             {
                 MostrarFinalJuego();
+                Debug.Log("¡Has completado el juego! Mostrando cinemática final...");
             }
             else
             {
-                CinematicManager.instancia.ReproducirSiguiente();
+                if (CinematicManager.instancia != null)
+                {
+                    CinematicManager.instancia.ReproducirSiguiente();
+                }
+                else
+                {
+                    Debug.LogError("Error: ¡No se encuentra el CinematicManager en la escena!");
+                }
             }
         }
         else
@@ -194,5 +209,6 @@ public class GameManager : MonoBehaviour
         tirosRealizados = 0;
         bolosRestantes = 10;
         panelBolos.text = "Quedan " + bolosRestantes + " bolos.";
+        procesandoResultado = false;
     }
 }

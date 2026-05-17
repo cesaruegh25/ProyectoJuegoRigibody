@@ -14,6 +14,8 @@ public class CinematicManager : MonoBehaviour
 
     public int indiceActual = 0;
 
+    private bool cinematicaEnCurso = false;
+
     void Awake()
     {
         if (instancia == null)
@@ -25,13 +27,16 @@ public class CinematicManager : MonoBehaviour
 
     public void ReproducirSiguiente()
     {
+        if (cinematicaEnCurso) return;
         if (indiceActual < cinemáticas.Length)
         {
+            cinematicaEnCurso = true;
             objetoGameplay.SetActive(false);
             foreach (GameObject en in enemigos) en.SetActive(false);
             GameObject cineObj = cinemáticas[indiceActual].gameObject;
             cineObj.SetActive(true);
             cinemáticas[indiceActual].Play();
+            cinemáticas[indiceActual].stopped -= AlTerminarCinematica;
             cinemáticas[indiceActual].stopped += AlTerminarCinematica;
         }
         else
@@ -45,6 +50,7 @@ public class CinematicManager : MonoBehaviour
         director.stopped -= AlTerminarCinematica;
         director.gameObject.SetActive(false);
         indiceActual++;
+        cinematicaEnCurso = false;
         objetoGameplay.SetActive(true);
         if (indiceActual > 0 && (indiceActual - 1) < enemigos.Length)
         {
