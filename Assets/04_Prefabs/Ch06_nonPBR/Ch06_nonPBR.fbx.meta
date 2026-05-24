@@ -3,7 +3,22 @@ guid: e8239c3e3729f434ca1c600956ed3759
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch06_body
+    second: {fileID: 5671703129758871248, guid: e357883ab68675c419125b729f308979, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch06_body1
+    second: {fileID: -3175032608164719009, guid: e357883ab68675c419125b729f308979, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ch06_eyelashes
+    second: {fileID: 4178974042983786991, guid: e357883ab68675c419125b729f308979, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
