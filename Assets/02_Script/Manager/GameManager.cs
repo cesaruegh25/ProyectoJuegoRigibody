@@ -1,9 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class GameManager : MonoBehaviour
 {
@@ -191,6 +189,8 @@ public class GameManager : MonoBehaviour
         // Aquí activas la cinemática final y luego el HUD
         hudFinal.SetActive(true);
         Time.timeScale = 0; // Pausar el juego al final
+        Cursor.visible = true; // Mostrar el cursor para que el jugador pueda interactuar con el botón de salir
+        Cursor.lockState = CursorLockMode.None; // Desbloquear el cursor para que pueda moverse libremente
     }
 
     public void SalirDelJuego()
