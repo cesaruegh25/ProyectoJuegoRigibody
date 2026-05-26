@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
     void MostrarFinalJuego()
     {
         // Aquí activas la cinemática final y luego el HUD
-        hudFinal.SetActive(true);
+        
         Time.timeScale = 0; // Pausar el juego al final
         Cursor.visible = true; // Mostrar el cursor para que el jugador pueda interactuar con el botón de salir
         Cursor.lockState = CursorLockMode.None; // Desbloquear el cursor para que pueda moverse libremente
