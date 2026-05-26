@@ -12,7 +12,7 @@ public class Lanzar : MonoBehaviour
     public float fuerzaBola = 1000f; // esto es temporal cada bola tendra su fuerza, pero por ahora lo dejo fijo para probar
 
     public Slider barraFuerza;
-    public float velocidadCarga = 1.5f; // Qué tan rápido sube la barra
+    public float velocidadCarga = 1.5f; // Quï¿½ tan rï¿½pido sube la barra
 
     private float fuerzaActual = 0f;
     private bool cargando = false;
@@ -43,7 +43,7 @@ public class Lanzar : MonoBehaviour
             playerLook.AcivarCamara(1);
             if (ball == null)
             {
-                prefabBall.transform.localScale = new Vector3(2f, 2f, 2f); // Ajusta el tamaño de la bola
+                prefabBall.transform.localScale = new Vector3(4f, 4f, 4f); // Ajusta el tamaï¿½o de la bola
                 ball = Instantiate(prefabBall, hand.transform.position, Quaternion.identity, hand.transform); // Instancia la bola como hijo de la mano
                 //ball = hand.transform.GetChild(0).gameObject; // Asume que la bola es el primer hijo de la mano
             }
@@ -69,10 +69,10 @@ public class Lanzar : MonoBehaviour
         {
             ball.transform.SetParent(null); // Desvincula la bola del jugador
             Rigidbody rb = ball.GetComponent<Rigidbody>();
-            rb.isKinematic = false; // Asegura que la bola no sea kinemática
+            rb.isKinematic = false; // Asegura que la bola no sea kinemï¿½tica
             rb.useGravity = true; // Activa la gravedad para la bola
             rb.AddForce(transform.forward * fuerzaActual * fuerzaBola);
-            Destroy(ball, 5f); // Destruye la bola después de 5 segundos para limpiar la escena
+            Destroy(ball, 5f); // Destruye la bola despuï¿½s de 5 segundos para limpiar la escena
             ball = null; // Limpia la referencia a la bola en la mano
             PlayerLook playerLook = GetComponent<PlayerLook>();
             barraFuerza.gameObject.SetActive(false);
@@ -85,7 +85,7 @@ public class Lanzar : MonoBehaviour
     }
     void ActualizarFuerza()
     {
-        // Esto crea un efecto de "vaivén" (sube y baja) si se mantiene mucho tiempo
+        // Esto crea un efecto de "vaivï¿½n" (sube y baja) si se mantiene mucho tiempo
         if (subiendo)
         {
             fuerzaActual += Time.deltaTime * velocidadCarga;
