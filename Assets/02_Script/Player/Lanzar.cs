@@ -43,6 +43,7 @@ public class Lanzar : MonoBehaviour
             playerLook.AcivarCamara(1);
             if (ball == null)
             {
+                prefabBall.transform.localScale = new Vector3(2f, 2f, 2f); // Ajusta el tamaño de la bola
                 ball = Instantiate(prefabBall, hand.transform.position, Quaternion.identity, hand.transform); // Instancia la bola como hijo de la mano
                 //ball = hand.transform.GetChild(0).gameObject; // Asume que la bola es el primer hijo de la mano
             }

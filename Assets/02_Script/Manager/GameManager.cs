@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public TMP_Dropdown dropownBolas;
     public TextMeshProUGUI panelVictoria;
     public TextMeshProUGUI panelBolos;
+    public TextMeshProUGUI panelBolosEnemigo;
     public UnityEngine.UI.Button botonReiniciar;
 
     public int tirosRealizados = 0;
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
     bool final = false;
     [Header("Puntuaciones")]
     public int bolosJugador;
-    public int bolosEnemigo;
+    private int bolosEnemigo = 10;
 
     [Header("UI Final")]
     public GameObject hudFinal; // El panel con el botón de "Salir"
@@ -101,6 +102,11 @@ public class GameManager : MonoBehaviour
         bolosRestantes--;
         panelBolos.text = "Quedan " + bolosRestantes + " bolos.";
     }
+    public void BoloEnemigoDestruido()
+    {
+        bolosEnemigo--;
+        panelBolosEnemigo.text = "Bolos enemigos restantes: " + bolosEnemigo;
+    }
     public void ComprobarDerrota()
     {
         if (!final)
@@ -149,8 +155,6 @@ public class GameManager : MonoBehaviour
         if (tirosEnemigo <= 1)
         {
             enemigoActual.GetComponent<Animator>().SetTrigger("lanzar");
-            bolosEnemigo = Random.Range(1, 11);
-            Debug.Log("El enemigo ha derribado: " + bolosEnemigo);
             turnoJugador = true;
         }
         tirosEnemigo++;
@@ -186,11 +190,11 @@ public class GameManager : MonoBehaviour
     }
     void MostrarFinalJuego()
     {
-        // Aquí activas la cinemática final y luego el HUD
-        SceneManagerController.Instance.LoadScene("EndGame");
         Time.timeScale = 0; // Pausar el juego al final
         Cursor.visible = true; // Mostrar el cursor para que el jugador pueda interactuar con el botón de salir
         Cursor.lockState = CursorLockMode.None; // Desbloquear el cursor para que pueda moverse libremente
+        // Aquí activas la cinemática final y luego el HUD
+        SceneManagerController.Instance.LoadScene("EndGame");
     }
 
     public void SalirDelJuego()
@@ -203,12 +207,19 @@ public class GameManager : MonoBehaviour
         player.Play("Idle");
         botonReiniciar.gameObject.SetActive(false);
         GameObject.FindGameObjectWithTag("PosBolos").GetComponent<PosBolos>().ReiniciarBolos();
+        GameObject.FindGameObjectWithTag("PosBolosEnemy").GetComponent<PosBolos>().ReiniciarBolos();
         juegoTerminado = false;
         menuPrincipal = false;
         final = false;
         tirosRealizados = 0;
         bolosRestantes = 10;
+        bolosEnemigo = 10;
         panelBolos.text = "Quedan " + bolosRestantes + " bolos.";
+        if (enemigoActual != null)
+        {
+            panelBolosEnemigo.text = "Bolos enemigos restantes: " + bolosEnemigo;
+        }
         procesandoResultado = false;
+        turnoJugador = true;
     }
 }
