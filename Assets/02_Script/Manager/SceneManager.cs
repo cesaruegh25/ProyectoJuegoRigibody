@@ -24,6 +24,7 @@ public class SceneManagerController : MonoBehaviour
     // Cambia de escena usando el nombre de la escena
     public void LoadScene(string sceneName)
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(sceneName);
     }
 

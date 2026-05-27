@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
         }
         juegoTerminado = false;
         menuPrincipal = true;
+        Time.timeScale = 1f;
     }
     void Update()
     {
@@ -198,6 +199,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            enemigoActual.GetComponent<Animator>().SetTrigger("victory");
             Debug.Log("Perdiste. Reintentar.");
             FinPartida();
         }
