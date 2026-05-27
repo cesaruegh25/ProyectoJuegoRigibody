@@ -22,6 +22,7 @@ public class LanzarEnemy : MonoBehaviour
             rb.AddForce(transform.forward * fuerzaActual * fuerzaBola);
             Destroy(ball, 5f); // Destruye la bola después de 5 segundos para limpiar la escena
             ball = null; // Limpia la referencia a la bola en la mano
+            GameManager.instancia.turnoJugador = true; // Cambia el turno al jugador después de lanzar
         }
     }
     public void inicio()

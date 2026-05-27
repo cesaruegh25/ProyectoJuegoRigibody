@@ -44,7 +44,26 @@ public class GameManager : MonoBehaviour
         { 
             instancia = this;
         }
+        /*
+        // Seguridad: Solo intentamos escribir si la referencia existe en el Inspector
+        if (panelBolos != null)
+        {
+            panelBolos.text = "Quedan " + bolosRestantes + " bolos.";
+        }
 
+        if (botonReiniciar != null)
+        {
+            botonReiniciar.gameObject.SetActive(false);
+            // Nos aseguramos de que el botón tenga asignada la función de reiniciar
+            botonReiniciar.onClick.RemoveAllListeners();
+            botonReiniciar.onClick.AddListener(ReiniciarJuego);
+        }
+        juegoTerminado = false;
+        menuPrincipal = true;*/
+    }
+
+    private void Start()
+    {
         // Seguridad: Solo intentamos escribir si la referencia existe en el Inspector
         if (panelBolos != null)
         {
@@ -90,7 +109,7 @@ public class GameManager : MonoBehaviour
         } else
         {
             dropownBolas.gameObject.SetActive(true);
-        } 
+        }
     }
     public void RegistrarTiro()
     {
@@ -145,9 +164,6 @@ public class GameManager : MonoBehaviour
         }
         enemigoActual = enemigo;
         turnoJugador = false;
-
-        // Simular que el enemigo tira después de un par de segundos
-        Invoke("EjecutarTiroEnemigo", 2f);
     }
     public void EjecutarTiroEnemigo()
     {
@@ -155,20 +171,18 @@ public class GameManager : MonoBehaviour
         if (tirosEnemigo <= 1)
         {
             enemigoActual.GetComponent<Animator>().SetTrigger("lanzar");
-            turnoJugador = true;
         }
         tirosEnemigo++;
+        Debug.Log("Tiro enemigo número: " + tirosEnemigo);
     }
     void CompararResultados()
     {
         // Lógica de comparación
         if (bolosRestantes <= bolosEnemigo)
         {
-            Debug.Log("¡Ganaste al enemigo!");
             if (enemigoActual.name.Contains("Ch06"))
             {
                 MostrarFinalJuego();
-                Debug.Log("¡Has completado el juego! Mostrando cinemática final...");
             }
             else
             {
@@ -191,6 +205,7 @@ public class GameManager : MonoBehaviour
     void MostrarFinalJuego()
     {
         Time.timeScale = 0; // Pausar el juego al final
+        menuPrincipal = true;
         Cursor.visible = true; // Mostrar el cursor para que el jugador pueda interactuar con el botón de salir
         Cursor.lockState = CursorLockMode.None; // Desbloquear el cursor para que pueda moverse libremente
         // Aquí activas la cinemática final y luego el HUD
@@ -215,11 +230,15 @@ public class GameManager : MonoBehaviour
         bolosRestantes = 10;
         bolosEnemigo = 10;
         panelBolos.text = "Quedan " + bolosRestantes + " bolos.";
+        procesandoResultado = false;
+        turnoJugador = true;
         if (enemigoActual != null)
         {
             panelBolosEnemigo.text = "Bolos enemigos restantes: " + bolosEnemigo;
+            tirosEnemigo = 0;
+            turnoJugador = false;
+            Invoke("EjecutarTiroEnemigo", 1f);
+            Debug.Log("Tiro enemigo programado reinicio");
         }
-        procesandoResultado = false;
-        turnoJugador = true;
     }
 }

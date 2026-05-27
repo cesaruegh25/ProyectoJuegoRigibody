@@ -21,6 +21,9 @@ public class Lanzar : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        fuerzaActual = 0f;
+        cargando = false;
+        subiendo = true;
         barraFuerza.gameObject.SetActive(false);
     }
 
@@ -79,7 +82,12 @@ public class Lanzar : MonoBehaviour
             playerLook.AcivarCamara(0);
             if(GameManager.instancia.enemigoActual != null)
             {
-                GameManager.instancia.Invoke("EjecutarTiroEnemigo", 4f);
+                GameManager.instancia.turnoJugador = false;
+                if(GameManager.instancia.tirosEnemigo == 1)
+                {
+                    GameManager.instancia.Invoke("EjecutarTiroEnemigo", 2f);
+                    Debug.Log("Tiro enemigo desde jugador lanzar programado");
+                }
             }
         }
     }
