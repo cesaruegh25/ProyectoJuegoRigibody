@@ -20,6 +20,7 @@ public class LanzarEnemy : MonoBehaviour
             rb.isKinematic = false; // Asegura que la bola no sea kinemática
             rb.useGravity = true; // Activa la gravedad para la bola
             rb.AddForce(transform.forward * fuerzaActual * fuerzaBola);
+            ball.GetComponent<AudioSource>().Play(); // Reproduce el sonido de lanzamiento
             Destroy(ball, 5f); // Destruye la bola después de 5 segundos para limpiar la escena
             ball = null; // Limpia la referencia a la bola en la mano
             GameManager.instancia.turnoJugador = true; // Cambia el turno al jugador después de lanzar

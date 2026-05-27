@@ -57,6 +57,10 @@ public class CinematicManager : MonoBehaviour
             enemigos[indiceActual - 1].SetActive(true);
             GameManager.instancia.IniciarTurnoEnemigo(enemigos[indiceActual - 1]);
         }
+        if(indiceActual >= cinemáticas.Length)
+        {
+            GameManager.instancia.MostrarFinalJuego();
+        }
         GameManager.instancia.PrepararSiguienteNivel();
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class bolo : MonoBehaviour
 {
     public bool destruido = false;
+    public AudioSource audioSource; // Referencia al componente AudioSource
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,20 +26,11 @@ public class bolo : MonoBehaviour
             }
         }
     }
-    /*private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("ball") || collision.gameObject.CompareTag("bolo"))
         {
-            Debug.Log("Colision con la bola " + transform.name + " con velocidad: " + GetComponent<Rigidbody>().linearVelocity.magnitude);
-            if (!destruido)
-            {
-                if (GameManager.instancia != null)
-                {
-                    //GameManager.instancia.BoloDestruido();
-                }
-                destruido = true; // Llama al método para actualizar el conteo de bolos
-            }
-            // Aquí puedes agregar la lógica para dañar al jugador o cualquier otra acción que desees realizar
+            audioSource.Play();
         }
-    }*/
+    }
 }

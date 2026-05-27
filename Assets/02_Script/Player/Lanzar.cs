@@ -75,6 +75,7 @@ public class Lanzar : MonoBehaviour
             rb.isKinematic = false; // Asegura que la bola no sea kinem�tica
             rb.useGravity = true; // Activa la gravedad para la bola
             rb.AddForce(transform.forward * fuerzaActual * fuerzaBola);
+            ball.GetComponent<AudioSource>().Play(); // Reproduce el sonido de lanzamiento
             Destroy(ball, 5f); // Destruye la bola despu�s de 5 segundos para limpiar la escena
             ball = null; // Limpia la referencia a la bola en la mano
             PlayerLook playerLook = GetComponent<PlayerLook>();

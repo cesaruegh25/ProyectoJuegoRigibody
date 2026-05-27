@@ -181,12 +181,12 @@ public class GameManager : MonoBehaviour
         // Lógica de comparación
         if (bolosRestantes <= bolosEnemigo)
         {
-            if (enemigoActual.name.Contains("Ch06"))
+            /*if (enemigoActual.name.Contains("Ch06"))
             {
                 MostrarFinalJuego();
             }
             else
-            {
+            {*/
                 if (CinematicManager.instancia != null)
                 {
                     CinematicManager.instancia.ReproducirSiguiente();
@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.LogError("Error: ¡No se encuentra el CinematicManager en la escena!");
                 }
-            }
+            //}
         }
         else
         {
@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
             FinPartida();
         }
     }
-    void MostrarFinalJuego()
+    public void MostrarFinalJuego()
     {
         Time.timeScale = 0; // Pausar el juego al final
         menuPrincipal = true;
